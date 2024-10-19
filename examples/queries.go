@@ -44,8 +44,18 @@ func runQueries(client *kiteinstruments.Client) {
 	segmentExpiries := client.QuerySegmentExpiriesByName(name)
 	printMapResults(fmt.Sprintf("QuerySegmentExpiriesByName(%s)", name), segmentExpiries)
 
-	// Query segment names by expiry
+	// Query segment names by expiry, expiry is today's date
 	expiry := time.Now().Format("2006-01-02")
 	segmentNames := client.QuerySegmentNamesByExpiry(expiry)
+	printMapResults(fmt.Sprintf("QuerySegmentNamesByExpiry(%s)", expiry), segmentNames)
+
+	// Query segment names by expiry, expiry is tomorrow's date
+	expiry = time.Now().AddDate(0, 0, 1).Format("2006-01-02")
+	segmentNames = client.QuerySegmentNamesByExpiry(expiry)
+	printMapResults(fmt.Sprintf("QuerySegmentNamesByExpiry(%s)", expiry), segmentNames)
+
+	// Query segment names by expiry, expiry is day after tomorrow's date
+	expiry = time.Now().AddDate(0, 0, 2).Format("2006-01-02")
+	segmentNames = client.QuerySegmentNamesByExpiry(expiry)
 	printMapResults(fmt.Sprintf("QuerySegmentNamesByExpiry(%s)", expiry), segmentNames)
 }
