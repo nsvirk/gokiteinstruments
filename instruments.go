@@ -5,7 +5,7 @@ import (
 	"sort"
 )
 
-const InstrumentsURL = "https://api.kite.trade/instruments"
+const instrumentsURL = "https://api.kite.trade/instruments"
 
 // Client represents a client for the kiteinstruments library
 type Client struct {
@@ -14,7 +14,7 @@ type Client struct {
 
 // NewClient creates a new Client and fetches the instruments data
 func NewClient(ctx context.Context) (*Client, error) {
-	instruments, err := FetchInstruments(ctx, InstrumentsURL)
+	instruments, err := fetchInstruments(ctx, instrumentsURL)
 	if err != nil {
 		return nil, err
 	}
